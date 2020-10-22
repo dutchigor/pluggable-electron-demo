@@ -31,7 +31,7 @@ function createWindow () {
   // Store mainWindow state
   winState.manage( mainWindow )
 
-  ipcMain.handle( 'pluggable:updatePluginsPath', ( e ) => {
+  ipcMain.handle( 'pluggable:updatePluginsPath', ( e ) =>
     dialog.showOpenDialog( mainWindow, {
       properties: ['openDirectory']
     }).then(
@@ -40,7 +40,7 @@ function createWindow () {
         return true
       }
     )
-  })
+  )
 }
 
 // This method will be called when Electron has finished
@@ -56,7 +56,7 @@ app.whenReady().then(() => {
   })
 
   // Initialise Pluggable Electron with the plugins folder
-  pe.init()
+  pe.init( [], { useRoutes: true } )
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

@@ -7,11 +7,12 @@
 
 document.getElementById( 'set-plugin-dir' ).addEventListener( 'click', ( e ) => {
   ipc.invoke( 'pluggable:updatePluginsPath' )
-    .then( 
+    .then( res => {
+      console.log( res )
       document.querySelectorAll( 'button' ).forEach(
         button => button.disabled = false
       )    
-    )
+    })
 })
 
 document.getElementById( 'install-file' ).addEventListener( 'submit', ( e ) => {
@@ -29,5 +30,14 @@ document.getElementById( 'install-pkg' ).addEventListener( 'submit', ( e ) => {
     pluginVersion = formData.get( 'plugin-version' )
 
   ipc.invoke( 'pluggable:install', pluginPkg, pluginVersion )
+    .then( res => console.log( res ) )
+})
+
+document.getElementById( 'uninstall-pkg' ).addEventListener( 'submit', ( e ) => {
+  e.preventDefault()
+  const formData = new FormData( e.target ),
+    pluginPkg = formData.get( 'plugin-pkg' )
+
+  ipc.invoke( 'pluggable:uninstall', pluginPkg )
     .then( res => console.log( res ) )
 })

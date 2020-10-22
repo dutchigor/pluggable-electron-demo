@@ -22,7 +22,7 @@
         </label>
       </div>
       <div class="col-install">
-        <button>Install</button>  
+        <button disabled>Install</button>  
       </div>
     </form>
     <form id="install-pkg" class="row">
@@ -35,10 +35,19 @@
         </label>
       </div>
       <div class="col-install">
-        <button>Install</button>  
+        <button disabled>Install</button>  
       </div>
     </form>
-      
+    <form id="uninstall-pkg" class="row">
+      <div class="col-select">
+        <label>Package name:
+          <input type="text" name="plugin-pkg" />
+        </label>
+      </div>
+      <div class="col-install">
+        <button disabled>Uninstall</button>  
+      </div>
+    </form>      
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>
