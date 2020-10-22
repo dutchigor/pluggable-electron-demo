@@ -5,14 +5,40 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <title>Plugn installer</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-
+    <h1>install your plugin here</h1>
+    <div class ="row">
+      <div class="col-select">
+        <button id="set-plugin-dir">Select plugin folder</button>
+      </div>
+    </div>
+    <form id="install-file" class="row">
+      <div class="col-select">
+        <label>Package file:
+          <input type="file" name="plugin-file" />
+        </label>
+      </div>
+      <div class="col-install">
+        <button>Install</button>  
+      </div>
+    </form>
+    <form id="install-pkg" class="row">
+      <div class="col-select">
+        <label>Package name:
+          <input type="text" name="plugin-pkg" />
+        </label>
+        <label>Package version:
+          <input type="text" name="plugin-version" />
+        </label>
+      </div>
+      <div class="col-install">
+        <button>Install</button>  
+      </div>
+    </form>
+      
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>

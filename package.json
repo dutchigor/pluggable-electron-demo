@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "watch": "nodemon -e js,json,html,css --exec electron .",
+    "build": "electron-builder --win"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,6 +19,11 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.3"
+    "electron": "^10.1.3",
+    "electron-builder": "^22.9.1"
+  },
+  "dependencies": {
+    "electron-window-state": "^5.0.3",
+    "pluggable-electron": "file:../pluggable-electron"
   }
 }

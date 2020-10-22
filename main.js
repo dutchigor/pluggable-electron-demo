@@ -1,12 +1,22 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
+const pe = require( 'pluggable-electron' )
+const winStateMan = require( 'electron-window-state' )
 
 function createWindow () {
+  // Initialise window state manager
+  let winState = winStateMan({
+    defaultWidth: 1000,
+    defaultHeight: 800
+  })
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: winState.width,
+    height: winState.height,
+    x: winState.x,
+    y: winState.y,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -16,7 +26,21 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  // Store mainWindow state
+  winState.manage( mainWindow )
+
+  ipcMain.handle( 'pluggable:updatePluginsPath', ( e ) => {
+    dialog.showOpenDialog( mainWindow, {
+      properties: ['openDirectory']
+    }).then(
+      dir => {
+        pe.updatePluginsPath( dir.filePaths[0] )
+        return true
+      }
+    )
+  })
 }
 
 // This method will be called when Electron has finished
@@ -30,6 +54,9 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  // Initialise Pluggable Electron with the plugins folder
+  pe.init()
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
