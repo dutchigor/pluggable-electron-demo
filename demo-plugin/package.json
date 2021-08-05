@@ -1,0 +1,14 @@
+{
+  "name": "demo-plugin",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Igor Honhoff",
+  "license": "MIT",
+  "activationPoints": [
+    "init"
+  ],
+  "scripts": {
+    "package": "rm -f ./demo-plugin*.tgz && npm pack"
+  }
+}
