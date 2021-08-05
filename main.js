@@ -1,62 +1,56 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const { app, BrowserWindow, protocol, dialog } = require('electron')
 const path = require('path')
-const pe = require( 'pluggable-electron' )
-const winStateMan = require( 'electron-window-state' )
+const pe = require('pluggable-electron')
 
-function createWindow () {
-  // Initialise window state manager
-  let winState = winStateMan({
-    defaultWidth: 1000,
-    defaultHeight: 800
-  })
+function createWindow() {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: winState.width,
-    height: winState.height,
-    x: winState.x,
-    y: winState.y,
+    width: 1000,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('./index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
-
-  // Store mainWindow state
-  winState.manage( mainWindow )
-
-  ipcMain.handle( 'pluggable:updatePluginsPath', ( e ) =>
-    dialog.showOpenDialog( mainWindow, {
-      properties: ['openDirectory']
-    }).then(
-      dir => {
-        pe.updatePluginsPath( dir.filePaths[0] )
-        return true
-      }
-    )
-  )
+  if (!app.isPackaged) mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  //Initialise pluggable Electron
+  pe.init(
+    {
+      // Function to check from the main process that user wants to install a plugin
+      confirmInstall: async plg => {
+        const answer = await dialog.showMessageBox({
+          message: `Are you sure you want to install the plugin found at:
+            ${plg}`,
+          buttons: ['Ok', 'Cancel'],
+          cancelId: 1,
+        })
+        console.log('Main:', answer);
+        return answer.response == 0
+      }
+    },
+    // Path to install plugin to
+    path.join(app.getPath('userData'), 'plugins')
+  )
+
   createWindow()
-  
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-
-  // Initialise Pluggable Electron with the plugins folder
-  pe.init( [], { useRoutes: true } )
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

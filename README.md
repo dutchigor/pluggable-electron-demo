@@ -1,18 +1,9 @@
-# electron-quick-start
+# Pluggable Electron demo
 
-**Clone and run for a quick way to see Electron in action.**
+**Clone and run for a quick way to see Pluggable Electron in action.**
 
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
-
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
-
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
+This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start)
+and enhanced with [Pluggable Electron](https://github.com/dutchigor/pluggable-electron). the purpose is to showcase the basics of Pluggable Electron.
 
 ## To Use
 
@@ -20,25 +11,36 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone **REPLACE WITH GITHUB URL**
+
 # Go into the repository
-cd electron-quick-start
+cd pluggable-electron-demo
+
 # Install dependencies
 npm install
+
+# package plugin
+npm run pkg-plugin
+
 # Run the app
 npm start
 ```
 
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+Once the application is open, you can try it out:
 
-## Resources for Learning Electron
+- Install the example plugin: select ./demo-plugin/demo-plugin-2.0.0.tgz (created in the previous step) in Package file and click install
+- Activate the plugin's extension point: Click on Activate Plugin
+- Try out the extension points:
+  - Click on Extend demo menu to enrich the menu with the items defined in the plugin extensions. This demonstrates
+    - an extension returning a plain object
+    - an extension returning a callback, taking the parent menu item as an input
+    - an extension returning an asynchronous callback
+  - Add a value for the demo price and click on Calculate costs to see the cost calculated
+    - This demonstrates 2 functions manipulating the cost in serial
+  - Add a url to the image url input and click Display image to attach an image to the card.
+    - This demonstrates an extension without a return value but manipulating the app directly.
 
-- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
-- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
+Detailed documentation on how to use Pluggable Electron can be found [here](https://github.com/dutchigor/pluggable-electron/wiki)
 
 ## License
 

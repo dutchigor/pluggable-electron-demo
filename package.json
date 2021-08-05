@@ -1,29 +1,18 @@
 {
-  "name": "electron-quick-start",
+  "name": "pluggable-electron-demo",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "watch": "nodemon -e js,json,html,css --exec electron .",
-    "build": "electron-builder --win"
+    "pkg-plugin": "cd demo-plugin && npm run package"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.3",
-    "electron-builder": "^22.9.1"
+    "electron": "^13.1.4"
   },
   "dependencies": {
-    "electron-window-state": "^5.0.3",
-    "pluggable-electron": "file:../pluggable-electron"
+    "bootstrap": "^5.1.0",
+    "pluggable-electron": "^0.2.0"
   }
 }

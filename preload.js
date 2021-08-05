@@ -1,5 +1,5 @@
-// All of the Node.js APIs are available in the preload process.
-// It has the same sandbox as a Chrome extension.
-const { ipcRenderer } = require('electron')
+// Make Pluggable Electron's facade available to hte renderer on window.plugins
+const { contextBridge } = require('electron')
+const facade = require("pluggable-electron/facade")
 
-global.ipc = ipcRenderer
+contextBridge.exposeInMainWorld("plugins", facade)
