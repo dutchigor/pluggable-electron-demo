@@ -11,7 +11,7 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone **REPLACE WITH GITHUB URL**
+git clone https://github.com/dutchigor/pluggable-electron-demo
 
 # Go into the repository
 cd pluggable-electron-demo
