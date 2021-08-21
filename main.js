@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, protocol, dialog } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 const path = require('path')
+const http = require('http')
 const pe = require('pluggable-electron')
 
 function createWindow() {
@@ -15,10 +16,14 @@ function createWindow() {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('./index.html')
-
-  // Open the DevTools.
-  if (!app.isPackaged) mainWindow.webContents.openDevTools()
+  const devUrl = 'http://localhost:3000/'
+  http.get(devUrl, () => {
+    mainWindow.loadURL(devUrl)
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools()
+  }).on('error', () => {
+    mainWindow.loadFile('app/index.html')
+  })
 }
 
 // This method will be called when Electron has finished
@@ -36,7 +41,6 @@ app.whenReady().then(() => {
           buttons: ['Ok', 'Cancel'],
           cancelId: 1,
         })
-        console.log('Main:', answer);
         return answer.response == 0
       }
     },

@@ -4,15 +4,24 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "dev-vue": "vite",
+    "dev-electron": "wait-on http://localhost:3000/index.html && electron .",
+    "dev": "concurrently --kill-others npm:dev-vue npm:dev-electron",
+    "start": "vite build && electron .",
     "pkg-plugin": "cd demo-plugin && npm run package"
   },
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^13.1.4"
+    "@vitejs/plugin-vue": "^1.4.0",
+    "concurrently": "^6.2.1",
+    "electron": "^13.1.4",
+    "vite": "^2.5.0",
+    "vite-plugin-html": "^2.1.0",
+    "wait-on": "^6.0.0"
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
-    "pluggable-electron": "^0.2.0"
+    "pluggable-electron": "^0.2.0",
+    "vue": "^3.2.4"
   }
 }
