@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { extensionPoints, activationPoints } from "pluggable-electron"
+import { activationPoints } from "pluggable-electron"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Set Pluggable Electron up in the renderer
@@ -13,7 +13,5 @@ async function setupPE() {
   plugins.forEach(plugin => activationPoints.register(plugin))
 }
 setupPE()
-
-console.log(window.location.href)
 
 createApp(App).mount('#app')

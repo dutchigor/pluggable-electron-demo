@@ -7,56 +7,16 @@
             <h2 class="card-title">Manage plugin lifecycle</h2>
           </div>
           <div class="card-body border-top">
-            <form id="install-file">
-              <div class="row align-items-end">
-                <div class="col-8">
-                  <label class="form-label"
-                    >Package file:
-                    <input
-                      type="file"
-                      name="plugin-file"
-                      class="form-control"
-                    />
-                  </label>
-                </div>
-                <div class="col-4 d-grid py-2">
-                  <button class="btn btn-primary">Install</button>
-                </div>
-              </div>
-            </form>
+            <install-plugin />
           </div>
           <div class="card-body border-top">
-            <form id="uninstall-plg">
-              <div class="row align-items-end">
-                <div class="col-8">
-                  <label class="form-label"
-                    >Package name:
-                    <input type="text" name="plugin-pkg" class="form-control" />
-                  </label>
-                </div>
-                <div class="col-4 d-grid py-2">
-                  <button class="btn btn-primary">Uninstall</button>
-                </div>
-              </div>
-            </form>
+            <uninstall-plugin />
           </div>
           <div class="card-body border-top">
-            <div class="row justify-content-end">
-              <div class="col-4 d-grid py-2">
-                <button class="btn btn-primary" id="update-plgs">
-                  Update plugins
-                </button>
-              </div>
-            </div>
+            <update-plugins />
           </div>
           <div class="card-body border-top">
-            <div class="row justify-content-end">
-              <div class="col-4 d-grid py-2">
-                <button class="btn btn-primary" id="activate-plgs">
-                  Activate plugins
-                </button>
-              </div>
-            </div>
+            <activate-plugins />
           </div>
         </div>
       </div>
@@ -160,4 +120,16 @@
 </template>
 
 <script>
+import installPlugin from "./components/install-plugin.vue";
+import UninstallPlugin from "./components/uninstall-plugin.vue";
+import UpdatePlugins from "./components/update-plugins.vue";
+import ActivatePlugins from "./components/activate-plugins.vue";
+export default {
+  components: {
+    installPlugin,
+    UninstallPlugin,
+    UpdatePlugins,
+    ActivatePlugins,
+  },
+};
 </script>
