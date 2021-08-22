@@ -13,6 +13,7 @@ import { activationPoints } from "pluggable-electron";
 
 export default {
   setup() {
+    // Trigger the init activation point on clicking activate plugins
     function activate() {
       activationPoints.trigger("init");
       console.log("'Init' activation point triggered.");
@@ -22,6 +23,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
