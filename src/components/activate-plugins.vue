@@ -12,11 +12,12 @@
 import { activationPoints } from "pluggable-electron";
 
 export default {
-  setup() {
+  setup(props, { emit }) {
     // Trigger the init activation point on clicking activate plugins
     function activate() {
       activationPoints.trigger("init");
       console.log("'Init' activation point triggered.");
+      emit("activated", true);
     }
 
     return { activate };

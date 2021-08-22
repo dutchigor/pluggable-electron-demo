@@ -16,7 +16,7 @@
             <update-plugins />
           </div>
           <div class="card-body border-top">
-            <activate-plugins />
+            <activate-plugins @activated="activated = $event" />
           </div>
         </div>
       </div>
@@ -26,42 +26,7 @@
             <h2>Test Extension Points</h2>
           </div>
           <div class="card-body border-top">
-            <div class="row">
-              <h4>Parallel execution</h4>
-            </div>
-            <div class="row align-items-start">
-              <div class="col-8">
-                <p class="menu-title">Demo menu:</p>
-                <nav class="navbar navbar-light bg-light">
-                  <div class="container-fluid">
-                    <div class="navbar-collapse">
-                      <ul class="navbar-nav" id="demo-menu">
-                        <li class="nav-item dropdown">
-                          <a
-                            href="#"
-                            class="nav-link dropdown-toggle"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            >parent item
-                          </a>
-                          <ul class="dropdown-menu" id="demo-parent-li"></ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </nav>
-              </div>
-              <div class="col-4 d-grid py-2">
-                <button
-                  class="btn btn-primary extend"
-                  id="extend-menu"
-                  disabled
-                >
-                  Extend demo menu
-                </button>
-              </div>
-            </div>
+            <parallel-execution :activated="activated" />
           </div>
           <div class="card-body border-top">
             <div class="row">
@@ -124,12 +89,21 @@ import installPlugin from "./components/install-plugin.vue";
 import UninstallPlugin from "./components/uninstall-plugin.vue";
 import UpdatePlugins from "./components/update-plugins.vue";
 import ActivatePlugins from "./components/activate-plugins.vue";
+import ParallelExecution from "./components/parallel-execution.vue";
+import { ref } from "vue";
+
 export default {
   components: {
     installPlugin,
     UninstallPlugin,
     UpdatePlugins,
     ActivatePlugins,
+    ParallelExecution,
+  },
+  setup() {
+    const activated = ref(false);
+
+    return { activated };
   },
 };
 </script>
