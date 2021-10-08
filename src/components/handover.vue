@@ -28,8 +28,7 @@
 </template>
 
 <script>
-import { ref, computed, watchEffect } from "vue";
-import { extensionPoints } from "pluggable-electron";
+import { ref, computed, inject } from "vue";
 
 export default {
   props: {
@@ -37,11 +36,13 @@ export default {
   },
   setup(props) {
     const images = ref([]);
-    const imgComponent = computed(() => {
-      console.log({ activated: props.activated });
-      if (!props.activated) return [];
 
-      return extensionPoints.execute("display-img");
+    // Provided in main.js
+    const extensionManager = inject("extensionManager");
+    const imgComponent = computed(() => {
+      // Only execute the extension point after the relevant activation point has been triggered.
+      if (!props.activated) return [];
+      return extensionManager.execute("display-img");
     });
 
     // With Vue plugins should not manipulate the dom directly.

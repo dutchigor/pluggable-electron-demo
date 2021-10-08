@@ -29,8 +29,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { extensionPoints } from "pluggable-electron";
+import { ref, inject } from "vue";
 
 export default {
   props: {
@@ -40,9 +39,12 @@ export default {
     // Set a default cost
     const cost = ref(0);
 
+    // Provided in main.js
+    const extensionManager = inject("extensionManager");
+
     // Set the cost, calculated in multiple steps by the plugins
     async function calculateCost(e) {
-      cost.value = await extensionPoints.executeSerial(
+      cost.value = await extensionManager.executeSerial(
         "calc-price",
         e.target.elements.price.value
       );

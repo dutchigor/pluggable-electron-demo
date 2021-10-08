@@ -9,11 +9,22 @@
         <img :src="img" class="d-block w-100" />
       </div>
     </div>
+    <component v-for="c in controls" :key="c.name" :is="c" />
   </div>
 </template>
 
 <script>
+import { inject } from "vue";
+
 export default {
-  props: ["images", "controls"],
+  props: ["images"],
+  setup() {
+    // Extension Manager is provided by the main app,
+    // allowing you to execute extension points within plugins as well
+    const extensionManager = inject("extensionManager");
+    const controls = extensionManager.execute("slider-controls");
+
+    return { controls };
+  },
 };
 </script>

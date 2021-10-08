@@ -50,9 +50,8 @@
 </template>
 
 <script>
-import { extensionPoints } from "pluggable-electron";
 import MenuItem from "./menu-item.vue";
-import { reactive } from "vue";
+import { reactive, inject } from "vue";
 
 export default {
   components: { MenuItem },
@@ -66,11 +65,14 @@ export default {
       children: [],
     });
 
+    // Provided in main.js
+    const extensionManager = inject("extensionManager");
+
     // Extend the menu with items coming from plugins
     async function extendMenu() {
       // Get additional menu items from plugins, providing the desired parent item
       const extendedItems = await Promise.all(
-        extensionPoints.execute("extend-menu", "demo-parent-li")
+        extensionManager.execute("extend-menu", "demo-parent-li")
       );
 
       // Update the different menu hierarchies in teh template
