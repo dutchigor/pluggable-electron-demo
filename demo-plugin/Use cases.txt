@@ -1,0 +1,6 @@
+- Return plain object
+- Return callback
+- Return async callback
+- Return result of async then sync serial callback
+- Return Component
+- Extend within extension

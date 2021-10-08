@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// import { injectHtml } from 'vite-plugin-html'
+import path from "path"
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
   plugins: [
     vue(),
     viteExternalsPlugin({
@@ -13,6 +12,10 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: './app',
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.js'),
+      formats: ['es']
+    },
   },
+
 })

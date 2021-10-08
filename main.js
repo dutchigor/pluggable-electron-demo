@@ -19,11 +19,11 @@ function createWindow() {
   const devUrl = 'http://localhost:3000/'
   http.get(devUrl, () => {
     mainWindow.loadURL(devUrl)
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools()
   }).on('error', () => {
     mainWindow.loadFile('app/index.html')
   })
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

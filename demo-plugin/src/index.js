@@ -1,3 +1,6 @@
+// Import any components used by your extensions
+import Slider from './components/Slider.vue'
+
 // Provide menu item as plain object
 const newItem = { text: "Item from object" }
 
@@ -26,14 +29,9 @@ const addVat = price => new Promise(resolve => {
 // Provide a synchronous method to manipulate the price provided by the extension point
 const addDelivery = price => price + 5
 
-// Append in img element to the img-viewer div with the provided url as source.
-// The url is provided by the extension point.
-const displayImg = url => {
-  const img = document.createElement("img");
-  img.setAttribute('src', url)
-  img.setAttribute('width', '100%')
-  document.getElementById('img-viewer').appendChild(img)
-}
+// Provide component to render images
+// The urls are provided as a prop to the returned component
+const displayImg = () => Slider
 
 // Register all the above functions and objects with the relevant extension points
 export function init(registerExtensions) {

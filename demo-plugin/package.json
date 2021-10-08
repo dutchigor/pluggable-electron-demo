@@ -2,13 +2,19 @@
   "name": "demo-plugin",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/demo-plugin.es.js",
   "author": "Igor Honhoff",
   "license": "MIT",
   "activationPoints": [
     "init"
   ],
   "scripts": {
-    "package": "rm -f ./demo-plugin*.tgz && npm pack"
+    "package": "vite build && rm -f ./demo-plugin*.tgz && npm pack"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/compiler-sfc": "^3.2.19",
+    "vite": "^2.6.3",
+    "vite-plugin-externals": "^0.3.0"
   }
 }

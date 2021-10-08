@@ -29,55 +29,11 @@
             <parallel-execution :activated="activated" />
           </div>
           <div class="card-body border-top">
-            <div class="row">
-              <h4>Serial execution</h4>
-            </div>
-            <form id="calc-price">
-              <div class="row align-items-end">
-                <div class="col-8">
-                  <label class="form-label currency-box" for="price"
-                    >Demo price:
-                  </label>
-                  <div class="input-group">
-                    <span class="input-group-text">€</span>
-                    <input
-                      type="number"
-                      step="0.01"
-                      name="price"
-                      class="form-control currency"
-                    />
-                  </div>
-                  <p>Cost: € <span id="demo-cost"></span></p>
-                </div>
-                <div class="col-4 d-grid py-2">
-                  <button class="btn btn-primary extend" disabled>
-                    Calculate cost
-                  </button>
-                </div>
-              </div>
-            </form>
+            <serial-execution :activated="activated" />
           </div>
           <div class="card-body border-top">
-            <div class="row">
-              <h4>Handover</h4>
-            </div>
-            <form id="display-img">
-              <div class="row align-items-end">
-                <div class="col-8">
-                  <label class="form-label"
-                    >Image url:
-                    <input type="text" name="img-url" class="form-control" />
-                  </label>
-                </div>
-                <div class="col-4 d-grid py-2">
-                  <button class="btn btn-primary extend" disabled>
-                    Display image
-                  </button>
-                </div>
-              </div>
-            </form>
+            <handover :activated="activated" />
           </div>
-          <div class="card-body border-top" id="img-viewer"></div>
         </div>
       </div>
     </div>
@@ -91,6 +47,9 @@ import UpdatePlugins from "./components/update-plugins.vue";
 import ActivatePlugins from "./components/activate-plugins.vue";
 import ParallelExecution from "./components/parallel-execution.vue";
 import { ref } from "vue";
+import SerialExecution from "./components/serial-execution.vue";
+import Handover from "./components/handover.vue";
+import * as bootstrap from "bootstrap";
 
 export default {
   components: {
@@ -99,6 +58,8 @@ export default {
     UpdatePlugins,
     ActivatePlugins,
     ParallelExecution,
+    SerialExecution,
+    Handover,
   },
   setup() {
     const activated = ref(false);

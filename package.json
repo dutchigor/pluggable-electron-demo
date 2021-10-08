@@ -16,7 +16,7 @@
     "concurrently": "^6.2.1",
     "electron": "^13.1.4",
     "vite": "^2.5.0",
-    "vite-plugin-html": "^2.1.0",
+    "vite-plugin-externals": "^0.3.0",
     "wait-on": "^6.0.0"
   },
   "dependencies": {
