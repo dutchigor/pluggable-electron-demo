@@ -9,7 +9,7 @@
         <div class="container-fluid">
           <div class="navbar-collapse">
             <ul class="navbar-nav">
-              <!-- <li class="nav-item dropdown">
+              <li class="nav-item dropdown">
                 <a
                   href="#"
                   class="nav-link dropdown-toggle"
@@ -18,11 +18,19 @@
                   aria-expanded="false"
                   >parent item
                 </a>
-                <ul class="dropdown-menu" id="demo-parent-li"></ul>
-              </li> -->
-              <li v-for="item in menuItems" :key="item.id" class="nav-item">
-                <a href="#" class="nav-link">{{ item.text }}</a>
+                <ul class="dropdown-menu" id="demo-parent-li">
+                  <menu-item
+                    v-for="item in menuItems.children"
+                    :key="item.id"
+                    :itemText="item.text"
+                  />
+                </ul>
               </li>
+              <menu-item
+                v-for="item in menuItems.top"
+                :key="item.id"
+                :itemText="item.text"
+              />
             </ul>
           </div>
         </div>
@@ -33,6 +41,7 @@
         class="btn btn-primary extend"
         id="extend-menu"
         :disabled="!activated"
+        @click="extendMenu"
       >
         Extend demo menu
       </button>
@@ -41,40 +50,37 @@
 </template>
 
 <script>
-import { Dropdown } from "bootstrap";
 import { extensionPoints } from "pluggable-electron";
-import { ref } from "vue";
+import MenuItem from "./menu-item.vue";
+import { reactive } from "vue";
 
 export default {
+  components: { MenuItem },
   props: {
     activated: Boolean,
   },
   setup() {
-    // Set default menu items
-    const defMenuItems = [{ text: "parent item", id: "demo-parent-li" }];
+    // Set up empty menu items
+    const menuItems = reactive({
+      top: [],
+      children: [],
+    });
 
-    // Get additional menu items from plugins, providing the desired parent item
-    // await Promise.all(
-    //   extensionPoints.execute("extend-menu", "demo-parent-li")
-    // )
+    // Extend the menu with items coming from plugins
+    async function extendMenu() {
+      // Get additional menu items from plugins, providing the desired parent item
+      const extendedItems = await Promise.all(
+        extensionPoints.execute("extend-menu", "demo-parent-li")
+      );
 
-    // transform menu items
-    const menuItems = ref(
-      defMenuItems.reduce((itemList, item) => {
-        if (item.parent) {
-          const parent = itemList.find((el) => (item.parent = el.id));
-          if (parent) {
-            el.children = el.children || [];
-            el.children.push(item);
-            return itemList;
-          }
-        }
-        itemList.push(item);
-        return itemList;
-      }, [])
-    );
+      // Update the different menu hierarchies in teh template
+      menuItems.top = extendedItems.filter((item) => !item.parent);
+      menuItems.children = extendedItems.filter(
+        (item) => item.parent === "demo-parent-li"
+      );
+    }
 
-    return { menuItems };
+    return { menuItems, extendMenu };
   },
 };
 </script>
