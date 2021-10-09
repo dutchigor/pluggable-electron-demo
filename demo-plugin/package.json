@@ -9,7 +9,8 @@
     "init"
   ],
   "scripts": {
-    "package": "vite build && rm -f ./demo-plugin*.tgz && npm pack"
+    "package": "vite build && rm -f ./demo-plugin*.tgz && npm pack",
+    "package-cmd": "vite build && del .\\demo-plugin*.tgz && npm pack"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
