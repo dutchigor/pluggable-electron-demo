@@ -8,20 +8,21 @@
     "dev-electron": "wait-on http://localhost:3000/index.html && electron .",
     "dev": "concurrently --kill-others npm:dev-vue npm:dev-electron",
     "start": "vite build && electron .",
-    "pkg-plugin": "cd demo-plugin && npm run package"
+    "pkg-plugin": "cd demo-plugin && npm run package",
+    "pkg-plugin-cmd": "cd demo-plugin && npm run package-cmd"
   },
   "license": "CC0-1.0",
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.4.0",
     "concurrently": "^6.2.1",
-    "electron": "^13.1.4",
+    "electron": "^15.1.1",
     "vite": "^2.5.0",
     "vite-plugin-externals": "^0.3.0",
     "wait-on": "^6.0.0"
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
-    "pluggable-electron": "^0.3.0",
+    "pluggable-electron": "file:../pluggable-electron",
     "vue": "^3.2.4"
   }
 }
