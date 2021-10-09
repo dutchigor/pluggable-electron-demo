@@ -16,14 +16,21 @@ function createWindow() {
   })
 
   // and load the index.html of the app.
-  const devUrl = 'http://localhost:3000/'
-  http.get(devUrl, () => {
-    mainWindow.loadURL(devUrl)
-  }).on('error', () => {
-    mainWindow.loadFile('app/index.html')
-  })
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  const prodIndex = 'app/index.html'
+  if (app.isPackaged) {
+    // For production
+    mainWindow.loadFile(prodIndex)
+  } else {
+    // For development
+    const devUrl = 'http://localhost:3000/'
+    http.get(devUrl, () => {
+      mainWindow.loadURL(devUrl)
+    }).on('error', () => {
+      mainWindow.loadFile(prodIndex)
+    })
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools()
+  }
 }
 
 // This method will be called when Electron has finished
