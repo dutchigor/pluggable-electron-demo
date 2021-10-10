@@ -14,6 +14,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.4.0",
+    "@vue/compiler-sfc": "^3.2.20",
     "concurrently": "^6.2.1",
     "electron": "^15.1.2",
     "vite": "^2.5.0",
@@ -21,6 +22,7 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.1.0",
     "pluggable-electron": "^0.3.1",
     "vue": "^3.2.4"
