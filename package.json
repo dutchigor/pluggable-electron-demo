@@ -15,14 +15,14 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.4.0",
     "concurrently": "^6.2.1",
-    "electron": "^15.1.1",
+    "electron": "^15.1.2",
     "vite": "^2.5.0",
     "vite-plugin-externals": "^0.3.0",
     "wait-on": "^6.0.0"
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
-    "pluggable-electron": "file:../pluggable-electron",
+    "pluggable-electron": "^0.3.1",
     "vue": "^3.2.4"
   }
 }
