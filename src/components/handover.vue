@@ -12,7 +12,7 @@
       </div>
       <div class="col-4 d-grid py-2">
         <button class="btn btn-primary extend" :disabled="!activated">
-          Display image
+          Display images
         </button>
       </div>
     </div>
