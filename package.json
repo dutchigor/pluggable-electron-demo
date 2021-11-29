@@ -8,8 +8,7 @@
     "dev-electron": "wait-on http://localhost:3000/index.html && electron .",
     "dev": "concurrently --kill-others npm:dev-vue npm:dev-electron",
     "start": "vite build && electron .",
-    "pkg-plugin": "cd demo-plugin && npm run package",
-    "pkg-plugin-cmd": "cd demo-plugin && npm run package-cmd"
+    "pkg-plugin": "cd demo-plugin && npm run package"
   },
   "license": "CC0-1.0",
   "devDependencies": {

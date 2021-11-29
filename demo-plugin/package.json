@@ -1,6 +1,6 @@
 {
   "name": "demo-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "dist/demo-plugin.es.js",
   "author": "Igor Honhoff",
@@ -9,12 +9,12 @@
     "init"
   ],
   "scripts": {
-    "package": "vite build && rm -f ./demo-plugin*.tgz && npm pack",
-    "package-cmd": "vite build && del .\\demo-plugin*.tgz && npm pack"
+    "package": "vite build && rimraf ./demo-plugin*.tgz && npm pack"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.19",
+    "rimraf": "^3.0.2",
     "vite": "^2.6.3",
     "vite-plugin-externals": "^0.3.0"
   }
