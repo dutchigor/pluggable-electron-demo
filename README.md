@@ -16,11 +16,13 @@ git clone https://github.com/dutchigor/pluggable-electron-demo
 # Go into the repository
 cd pluggable-electron-demo
 
-# Install dependencies
+# Install dependencies for app and plugin
+npm install
+cd demo-plugin
 npm install
 
 # package plugin
-npm run pkg-plugin
+npm run package
 
 # Run the app
 npm start
