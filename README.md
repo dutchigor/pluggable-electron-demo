@@ -18,10 +18,8 @@ npm install
 cd demo-plugin
 npm install
 
-# package plugin (*nix systems/Git bash)
+# package plugin
 npm run package
-# or (windows)
-npm run package-cmd
 
 # Run the app
 cd ..
