@@ -1,15 +1,13 @@
 <template>
   <div class="row justify-content-end">
     <div class="col-4 d-grid py-2">
-      <button class="btn btn-primary" @click="activate">
-        Activate plugins
-      </button>
+      <button class="btn btn-primary" @click="activate">Activate plugins</button>
     </div>
   </div>
 </template>
 
 <script>
-import { activationPoints } from "pluggable-electron";
+import { activationPoints } from "pluggable-electron/renderer";
 
 export default {
   setup(props, { emit }) {

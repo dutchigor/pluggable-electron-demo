@@ -2,7 +2,7 @@
 const { app, BrowserWindow, dialog } = require('electron')
 const path = require('path')
 const http = require('http')
-const pe = require('pluggable-electron')
+const pe = require('pluggable-electron/main')
 
 function createWindow() {
 

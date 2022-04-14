@@ -2,8 +2,8 @@
   <form @submit.prevent="install">
     <div class="row align-items-end">
       <div class="col-8">
-        <label class="form-label"
-          >Package file:
+        <label class="form-label">
+          Package file:
           <input type="file" class="form-control" @change="setFilePath" />
         </label>
       </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { activationPoints } from "pluggable-electron";
+import { activationPoints } from "pluggable-electron/renderer";
 import { ref } from "vue";
 
 export default {

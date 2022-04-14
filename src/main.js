@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { activationPoints, extensionPoints } from "pluggable-electron"
+import { activationPoints, extensionPoints } from "pluggable-electron/renderer"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Set Pluggable Electron up in the renderer
