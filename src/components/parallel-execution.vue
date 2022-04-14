@@ -10,40 +10,29 @@
           <div class="navbar-collapse">
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                <a
-                  href="#"
-                  class="nav-link dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  >parent item
+                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">parent item
                 </a>
                 <ul class="dropdown-menu" id="demo-parent-li">
-                  <menu-item
-                    v-for="item in menuItems.children"
-                    :key="item.id"
-                    :itemText="item.text"
-                  />
+                  <menu-item v-for="item in menuItems.children" :key="item.id" :itemText="item.text" />
                 </ul>
               </li>
-              <menu-item
-                v-for="item in menuItems.top"
-                :key="item.id"
-                :itemText="item.text"
-              />
+              <menu-item v-for="item in menuItems.top" :key="item.id" :itemText="item.text" />
             </ul>
           </div>
         </div>
       </nav>
     </div>
-    <div class="col-4 d-grid py-2">
-      <button
-        class="btn btn-primary extend"
-        id="extend-menu"
-        :disabled="!activated"
-        @click="extendMenu"
-      >
+    <div class="col-4 d-grid py-2 flex">
+      <button class="btn btn-primary extend" id="extend-menu" :disabled="!activated" @click="extendMenu">
         Extend demo menu
+      </button>
+      <button class="btn btn-primary extend mt-2" id="extend-menu" :disabled="!activated"
+        @click="unregMenuItem('newItem')">
+        Remove "Item from object"
+      </button>
+      <button class="btn btn-primary extend mt-2" id="extend-menu" :disabled="!activated" @click="clearMenu">
+        Clear menu
       </button>
     </div>
   </div>
@@ -82,7 +71,24 @@ export default {
       );
     }
 
-    return { menuItems, extendMenu };
+    async function unregMenuItem(item) {
+      const extension = extensionManager.get()
+      if (extension['extend-menu']) {
+        extension['extend-menu'].unregister(item)
+        extendMenu()
+      }
+    }
+
+    function clearMenu() {
+      const extensions = extensionManager.get()
+      if (extensions['extend-menu']) {
+        extensions['extend-menu'].clear()
+        extendMenu()
+      }
+
+    }
+
+    return { menuItems, extendMenu, unregMenuItem, clearMenu };
   },
 };
 </script>
