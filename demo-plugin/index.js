@@ -36,13 +36,13 @@ const displayImg = url => {
 }
 
 // Register all the above functions and objects with the relevant extension points
-export function init(registerExtensions) {
-  registerExtensions('extend-menu', 'newItem', newItem)
-  registerExtensions('extend-menu', 'newChildItem', newChildItem)
-  registerExtensions('extend-menu', 'asyncChildItem', asyncChildItem)
+export function init({ register }) {
+  register('extend-menu', 'newItem', newItem)
+  register('extend-menu', 'newChildItem', newChildItem)
+  register('extend-menu', 'asyncChildItem', asyncChildItem)
   // Notice that for the calc-price extension point, the addVat function is executed
   // before the addDelivery because it has a lower priority
-  registerExtensions('calc-price', 'addVat', addVat, 1)
-  registerExtensions('calc-price', 'addDelivery', addDelivery, 10)
-  registerExtensions('display-img', 'displayImg', displayImg)
+  register('calc-price', 'addVat', addVat, 1)
+  register('calc-price', 'addDelivery', addDelivery, 10)
+  register('display-img', 'displayImg', displayImg)
 }
