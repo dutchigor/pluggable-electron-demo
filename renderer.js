@@ -3,16 +3,15 @@
 // Access the plugins facade through window.plugins
 // as set up in preload.js
 
-import { extensionPoints, activationPoints } from './node_modules/pluggable-electron/dist/execution.es.js'
+import { setup, plugins, extensionPoints, activationPoints } from './node_modules/pluggable-electron/dist/execution.es.js'
 
 // Set Pluggable Electron up in the renderer
 async function setupPE() {
   // Enable activation point management
-  activationPoints.setup({ importer: (plugin) => import(plugin) })
+  setup({ importer: (plugin) => import(plugin) })
 
   // Register all active plugins with their activation points
-  const plugins = await window.plugins.getActive()
-  plugins.forEach(plugin => activationPoints.register(plugin))
+  await plugins.registerActive()
 }
 setupPE()
 
@@ -23,10 +22,8 @@ document.getElementById('install-file').addEventListener('submit', async (e) => 
 
   // Send the filename of the to be installed plugin
   // to the main process for installation
-  const plugin = await plugins.install(pluginFile)
-  console.log('Installed plugin:', plugin);
-  // If installation was successful, register its activation points
-  if (!plugin.cancelled) activationPoints.register(plugin)
+  const installed = await plugins.install([pluginFile])
+  console.log('Installed plugin:', installed)
 })
 
 // Uninstall a plugin on clicking uninstall
@@ -36,15 +33,15 @@ document.getElementById('uninstall-plg').addEventListener('submit', async (e) =>
 
   // Send the filename of the to be uninstalled plugin
   // to the main process for removal
-  const res = await plugins.uninstall(pluginPkg)
+  const res = await plugins.uninstall([pluginPkg])
   console.log(res ? 'Plugin successfully uninstalled' : 'Plugin could not be uninstalled')
 })
 
 // Update all plugins on clicking update plugins
 document.getElementById('update-plgs').addEventListener('click', async (e) => {
-  const plugins = await window.plugins.getActive()
-  plugins.forEach(plugin => window.plugins.update(plugin.name))
-  console.log('Plugins updated');
+  const active = await plugins.getActive()
+  plugins.update(active.map(plg => plg.name))
+  console.log('Plugins updated')
 })
 
 // Trigger the init activation point on clicking activate plugins
@@ -57,7 +54,7 @@ document.getElementById('activate-plgs').addEventListener('click', async (e) => 
   for (const btn of buttons) {
     btn.disabled = false
   }
-  console.log('"Init" activation point triggered');
+  console.log('"Init" activation point triggered')
 })
 
 // Create a menu that can be extended through plugins

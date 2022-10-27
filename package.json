@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
-    "pluggable-electron": "^0.2.0"
+    "pluggable-electron": "^0.6.0"
   }
 }

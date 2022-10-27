@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, protocol, dialog } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 const path = require('path')
-const pe = require('pluggable-electron')
+const pe = require('pluggable-electron/main')
 
 function createWindow() {
 
@@ -29,19 +29,18 @@ app.whenReady().then(() => {
   pe.init(
     {
       // Function to check from the main process that user wants to install a plugin
-      confirmInstall: async plg => {
+      confirmInstall: async plugins => {
         const answer = await dialog.showMessageBox({
-          message: `Are you sure you want to install the plugin found at:
-            ${plg}`,
+          message: `Are you sure you want to install the plugin ${plugins.join(', ')}`,
           buttons: ['Ok', 'Cancel'],
           cancelId: 1,
         })
         console.log('Main:', answer);
         return answer.response == 0
-      }
-    },
-    // Path to install plugin to
-    path.join(app.getPath('userData'), 'plugins')
+      },
+      // Path to install plugin to
+      pluginsPath: path.join(app.getPath('userData'), 'plugins')
+    }
   )
 
   createWindow()
