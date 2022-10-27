@@ -7,15 +7,18 @@
 </template>
 
 <script>
+import { plugins } from 'pluggable-electron/renderer'
+
 export default {
   setup() {
     // Update all plugins on clicking update plugins
     async function update() {
       // Get all active plugins
-      const plugins = await window.plugins.getActive();
+      const plgs = await plugins.getActive();
 
       // Update each plugin
-      plugins.forEach((plugin) => window.plugins.update(plugin.name));
+      const names = plgs.map(plugin => plugin.name)
+      plugins.update(names)
 
       console.log("Plugins updated");
     }

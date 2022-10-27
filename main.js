@@ -42,18 +42,17 @@ app.whenReady().then(() => {
   pe.init(
     {
       // Function to check from the main process that user wants to install a plugin
-      confirmInstall: async plg => {
+      confirmInstall: async plugins => {
         const answer = await dialog.showMessageBox({
-          message: `Are you sure you want to install the plugin found at:
-            ${plg}`,
+          message: `Are you sure you want to install the plugins ${plugins.join(', ')}`,
           buttons: ['Ok', 'Cancel'],
           cancelId: 1,
         })
         return answer.response == 0
-      }
+      },
+      // Path to install plugin to
+      pluginsPath: path.join(app.getPath('userData'), 'plugins')
     },
-    // Path to install plugin to
-    path.join(app.getPath('userData'), 'plugins')
   )
 
   createWindow()

@@ -15,31 +15,30 @@
 </template>
 
 <script>
-import { activationPoints } from "pluggable-electron/renderer";
-import { ref } from "vue";
+import { plugins,activationPoints } from "pluggable-electron/renderer";
+import { ref, toRaw } from "vue";
 
 export default {
   setup() {
-    const filePath = ref("");
+    const filePaths = ref([]);
 
     // Store path of selected file
     function setFilePath(e) {
-      filePath.value = e.target.files[0].path;
+      const files = Array.from(e.target.files)
+      filePaths.value = files.map(file => file.path)
     }
 
     // Send the filename of the to be installed plugin
     // to the main process for installation
     async function install(e) {
-      const plugin = await window.plugins.install(filePath.value);
-      console.log("Installed plugin:", plugin);
-      // If installation was successful, register its activation points
-      if (!plugin.cancelled) activationPoints.register(plugin);
+      const plugin = await plugins.install(toRaw(filePaths.value));
+      console.log("Installed plugins:", plugin);
 
       // Reset the form
       e.target.reset();
     }
 
-    return { filePath, setFilePath, install };
+    return { filePath: filePaths, setFilePath, install };
   },
 };
 </script>

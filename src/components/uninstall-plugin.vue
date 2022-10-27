@@ -16,6 +16,8 @@
 
 <script>
 import { ref } from "vue";
+import {plugins} from 'pluggable-electron/renderer';
+
 export default {
   setup() {
     const pluginName = ref("");
@@ -23,7 +25,7 @@ export default {
     // Send the filename of the to be uninstalled plugin
     // to the main process for removal
     async function uninstall() {
-      const res = await window.plugins.uninstall(pluginName.value);
+      const res = await plugins.uninstall([pluginName.value]);
       console.log(
         res
           ? "Plugin successfully uninstalled"

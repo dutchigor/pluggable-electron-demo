@@ -23,7 +23,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
-    "pluggable-electron": "^0.5.1",
+    "pluggable-electron": "^0.6.0",
     "vue": "^3.2.40"
   }
 }
