@@ -9,10 +9,10 @@
   },
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^13.1.4"
+    "electron": "^28.2.0"
   },
   "dependencies": {
-    "bootstrap": "^5.1.0",
-    "pluggable-electron": "^0.6.0"
+    "bootstrap": "^5.3.2",
+    "pluggable-electron": "^1.0.0"
   }
 }

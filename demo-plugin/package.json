@@ -9,9 +9,9 @@
     "init"
   ],
   "scripts": {
-    "package": "rimraf ./demo-plugin*.tgz && npm pack"
+    "package": "rimraf --glob ./demo-plugin*.tgz && npm pack"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.5"
   }
 }
